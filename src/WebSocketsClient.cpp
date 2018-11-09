@@ -319,7 +319,6 @@ void WebSocketsClient::setReconnectInterval(unsigned long time) {
 void WebSocketsClient::messageReceived(WSclient_t * client, WSopcode_t opcode, uint8_t * payload, size_t length, bool fin) {
     WStype_t type = WStype_ERROR;
 
-    UNUSED(client);
 
     switch(opcode) {
         case WSop_text:
@@ -515,7 +514,7 @@ void WebSocketsClient::sendHeader(WSclient_t * client) {
     }
 
     // add extra headers; by default this includes "Origin: file://"
-    if(client->extraHeaders) {
+    if(client->extraHeaders.length() > 0) {
         handshake += client->extraHeaders + NEW_LINE;
     }
 
